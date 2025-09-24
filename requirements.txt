@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-scikit-learn   # or torch/tensorflow depending on your model
+scikit-learn==1.6.1
 joblib
 pandas
 pydantic
