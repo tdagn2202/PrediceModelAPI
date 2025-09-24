@@ -3,6 +3,7 @@ import joblib
 import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
+import logging
 
 # Load model, scaler, và danh sách cột
 model = joblib.load("model.pkl")
@@ -56,3 +57,12 @@ if __name__ == "__main__":
     import os, uvicorn
     port = int(os.environ.get("PORT", 8000)) 
     uvicorn.run("main:app", host="0.0.0.0", port=port)
+
+logging.basicConfig(level=logging.INFO)
+logging.info("Starting FastAPI app")
+
+
+import os
+assert os.path.exists("model.pkl"), "model.pkl not found"
+assert os.path.exists("scaler.pkl"), "scaler.pkl not found"
+assert os.path.exists("columns.pkl"), "columns.pkl not found"
