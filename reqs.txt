@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+scikit-learn   # or torch/tensorflow depending on your model
+joblib
