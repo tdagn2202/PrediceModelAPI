@@ -59,10 +59,16 @@ if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=port)
 
 logging.basicConfig(level=logging.INFO)
-logging.info("Starting FastAPI app")
+logger = logging.getLogger(__name__)
+logger.info("Starting FastAPI app")
 
 
-import os
-assert os.path.exists("model.pkl"), "model.pkl not found"
-assert os.path.exists("scaler.pkl"), "scaler.pkl not found"
-assert os.path.exists("columns.pkl"), "columns.pkl not found"
+import sys
+
+try:
+    model = joblib.load("./model.pkl")
+    scaler = joblib.load("./scaler.pkl")
+    columns = joblib.load("./columns.pkl")
+except Exception as e:
+    logger.error(f"Failed to load model/scaler/columns: {e}")
+    sys.exit(1)  # Exit so Railway knows deployment failed
