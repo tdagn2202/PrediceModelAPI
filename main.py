@@ -50,3 +50,9 @@ def predict_yield(data: YieldInput):
     prediction = model.predict(X)
 
     return {"predicted_yield": float(prediction[0])}
+
+
+if __name__ == "__main__":
+    import os, uvicorn
+    port = int(os.environ.get("PORT", 8000))  # Railway injects PORT
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
